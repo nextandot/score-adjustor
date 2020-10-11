@@ -1,10 +1,7 @@
-import React from 'react'
-import {AppProps} from 'next/app'; // 型定義を追加
+import { AppProps } from "next/app";
 
-// Functional Componentに書き直して型定義を追加
-// コンポーネント名をMyAppからAppに変更
-const App = ({Component, pageProps}: AppProps) => {
-    return 
+function App({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />;
 }
 
-export default App
+export default App;

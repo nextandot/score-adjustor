@@ -1,13 +1,12 @@
-import React, {FC} from 'react'  // {FC} をimport対象に追加
+import React, {FC} from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css' // srcディレクトリに移したことで階層が1つ深くなったので、「../」を追加
+import styles from '../../styles/Home.module.css'
 
-// Homeコンポーネントの型としてFC（FunctionalComponent）を定義
 const Home: FC = () => {
   return (
     <div>
       hoge
     </div>
   )
-};
+}
 export default Home;
