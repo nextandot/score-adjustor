@@ -1,30 +1,32 @@
-import { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 
-import { useTheme, makeStyles, Theme } from "@material-ui/core/styles";
+import { useTheme, makeStyles } from "@material-ui/core/styles";
 import {
   Toolbar,
   Typography,
   AppBar,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
+  Grid,
 } from "@material-ui/core";
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
-const useStyle = makeStyles({
-  root: (props: Theme) => ({
-    paddingTop: props.spacing(10),
-    paddingLeft: props.spacing(5),
-    paddingRight: props.spacing(5),
-  })
-});
+const useStyle = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+  input: {
+    display: 'none',
+  },
+}));
 
 export default function Home() {
-  const [ dialogOpen, setDialogOpen ] = useState(true);
   const classes = useStyle(useTheme());
   return (
     <div className={classes.root}>
@@ -33,45 +35,33 @@ export default function Home() {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
       </Head>
-      <Dialog open={dialogOpen} onClose={() => {setDialogOpen(false)}}>
-        <DialogTitle>Dialog Sample</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            hoge
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            color="primary"
-            onClick={() => {setDialogOpen(false)}}
-          >OK</Button>
-        </DialogActions>
-      </Dialog>
       <AppBar>
         <Toolbar>
-          <Typography variant="h6" color="inherit">
-            Header
-          </Typography>
+          <Typography variant="h6"><MusicNoteIcon />楽譜の難易度調整します<MusicNoteIcon /></Typography>
         </Toolbar>
       </AppBar>
-      <Typography variant="subtitle1" gutterBottom={true}>
-        example project
-      </Typography>
-      <Typography gutterBottom={true}>
-        <Link href="/about">
-          <a>Go to the about page</a>
-        </Link>
-      </Typography>
-      <Button
-        variant="contained"
-        color="secondary"
-        onClick={() => { setDialogOpen(true)}}
-      >Shot Dialog</Button>
-      <style jsx={true}>{`
-        .root {
-          text-align: center;
-        }
-      `}</style>
+      <Toolbar />
+      <Grid container direction="column" alignItems="center" justify="center">
+        <Grid item xs={8}>
+          <div>アップロードしてください</div>
+        </Grid>
+      </Grid>
+      <Grid container direction="column" alignItems="center" justify="center">
+        <Grid item xs={8}>
+          <input
+            accept="image/*"
+            className={classes.input}
+            id="contained-button-file"
+            multiple
+            type="file"
+          />
+          <label htmlFor="contained-button-file">
+            <Button variant="contained" color="primary" component="span">
+              upload<CloudUploadIcon />
+            </Button>
+          </label>
+        </Grid>
+      </Grid>
     </div>
   );
 }
